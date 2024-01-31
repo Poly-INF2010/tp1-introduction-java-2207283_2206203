@@ -86,13 +86,16 @@ public class Point2d extends AbstractPoint {
      * @return Rotated point
      */
     public Point2d rotate(Double angle) {
-        double cosTheta = Math.cos(angle);
-        double sinTheta = Math.sin(angle);
+        if (vector != null && vector.length >= 2) {
+            double cosTheta = Math.cos(angle);
+            double sinTheta = Math.sin(angle);
 
-        double newX = cosTheta * this.X() - sinTheta * this.Y();
-        double newY = sinTheta * this.X() + cosTheta * this.Y();
-        vector[X] = newX;
-        vector[Y] = newY;
+            double newX = cosTheta * vector[X] - sinTheta * vector[Y];
+            double newY = sinTheta * vector[X] + cosTheta * vector[Y];
+
+            vector[X] = newX;
+            vector[Y] = newY;
+        }
         return this;
     }
 
